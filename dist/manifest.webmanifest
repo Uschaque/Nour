@@ -1,0 +1,16 @@
+{
+  "name": "Nour — Horaires de prière",
+  "short_name": "Nour",
+  "id": "/",
+  "description": "Vos horaires de prière locaux et rappels simples.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f1e8",
+  "theme_color": "#163e37",
+  "categories": ["lifestyle", "utilities"],
+  "icons": [
+    {"src":"./icon-180.png","sizes":"180x180","type":"image/png","purpose":"any"},
+    {"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
