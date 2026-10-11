@@ -1,0 +1,11 @@
+{
+  "name": "nour-prayer-times",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=20"},
+  "dependencies": {
+    "@netlify/blobs": "11.1.4",
+    "web-push": "3.6.7"
+  }
+}
