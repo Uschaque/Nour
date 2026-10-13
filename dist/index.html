@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Nour">
-  <meta name="description" content="Horaires de prière locaux et rappels simples, où que vous soyez.">
+  <meta name="description" content="Local prayer times and simple reminders, wherever you are.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://geocoding-api.open-meteo.com; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="no-referrer">
   <link rel="manifest" href="./manifest.webmanifest">
@@ -15,42 +15,42 @@
   <link rel="apple-touch-icon" href="./icon-180.png">
   <link rel="stylesheet" href="./styles.css">
   <script src="./app.js" defer></script>
-  <title>Nour — Horaires de prière</title>
+  <title>Nour — Prayer Times</title>
 </head>
 <body>
   <div class="shell">
     <header>
       <div class="brand"><span class="brand-mark" aria-hidden="true">☾</span>Nour</div>
-      <button class="location" id="locationButton" type="button" aria-label="Modifier la localisation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span id="locationText">Chargement…</span></button>
+      <button class="location" id="locationButton" type="button" aria-label="Change location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span id="locationText">Loading…</span></button>
     </header>
     <main>
-      <section class="hero" aria-label="Prochaine prière">
-        <div class="eyebrow">Prochaine prière</div><h1 id="nextPrayer">—</h1><div class="next-label" id="nextTime">Calcul en cours…</div><div class="countdown"><i></i><span id="countdown">Calcul en cours…</span></div>
-        <div class="hero-bottom"><div class="date"><strong id="gregorianDate"></strong><span id="hijriDate"></span></div><button class="notify" id="notifyButton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span id="notifyButtonText">Activer les rappels</span></button></div>
+      <section class="hero" aria-label="Next prayer">
+        <div class="eyebrow">Next prayer</div><h1 id="nextPrayer">—</h1><div class="next-label" id="nextTime">Calculating…</div><div class="countdown"><i></i><span id="countdown">Calculating…</span></div>
+        <div class="hero-bottom"><div class="date"><strong id="gregorianDate"></strong><span id="hijriDate"></span></div><button class="notify" id="notifyButton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span id="notifyButtonText">Enable reminders</span></button></div>
       </section>
-      <aside class="panel"><div class="panel-head"><h2>Aujourd’hui</h2><select class="method" id="method" aria-label="Méthode de calcul"><option value="mwl">Ligue mondiale</option><option value="uoif">UOIF</option><option value="isna">ISNA</option><option value="egypt">Égypte</option><option value="makkah">La Mecque</option></select></div><div class="prayers" id="prayerList"></div></aside>
-      <section class="notice"><div class="notice-copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 8h.01"/></svg><div><strong>Un rappel simple, au bon moment</strong><p>Ajoutez Nour à l’écran d’accueil de votre iPhone pour recevoir les rappels même lorsque l’app est fermée.</p></div></div><button class="settings" id="settingsButton" type="button">Choisir ma ville →</button></section>
-      <div class="footer"><button id="privacyButton" type="button">Confidentialité et sécurité</button><span>•</span><span>Aucune publicité, aucun suivi</span></div>
+      <aside class="panel"><div class="panel-head"><h2>Today</h2><select class="method" id="method" aria-label="Calculation method"><option value="mwl">Muslim World League</option><option value="uoif">UOIF</option><option value="isna">ISNA</option><option value="egypt">Egyptian Authority</option><option value="makkah">Umm al-Qura, Makkah</option></select></div><div class="prayers" id="prayerList"></div></aside>
+      <section class="notice"><div class="notice-copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 8h.01"/></svg><div><strong>A simple reminder at the right time</strong><p>Add Nour to your iPhone Home Screen to receive reminders even when the app is closed.</p></div></div><button class="settings" id="settingsButton" type="button">Choose my city →</button></section>
+      <div class="footer"><button id="privacyButton" type="button">Privacy and security</button><span>•</span><span>No ads, no tracking</span></div>
     </main>
   </div>
 
   <dialog id="locationDialog">
     <div class="modal">
-      <h3>Choisir votre lieu</h3><p>Choisissez une ville, ou autorisez la position de l’appareil. Dans les deux cas, les coordonnées restent uniquement sur cet appareil.</p>
-      <div class="mode-tabs" role="tablist" aria-label="Mode de localisation"><button type="button" class="mode-tab active" data-mode="manual" role="tab">Pays + ville</button><button type="button" class="mode-tab" data-mode="live" role="tab">Position actuelle</button></div>
+      <h3>Choose your location</h3><p>Select a city or allow access to your device location. In both cases, the coordinates stay on this device.</p>
+      <div class="mode-tabs" role="tablist" aria-label="Location mode"><button type="button" class="mode-tab active" data-mode="manual" role="tab">Country + city</button><button type="button" class="mode-tab" data-mode="live" role="tab">Current location</button></div>
       <section id="manualLocation">
-        <form id="citySearchForm"><div class="fields"><div class="field"><label for="country">Pays</label><input id="country" name="country" autocomplete="country-name" placeholder="Suisse" required></div><div class="field"><label for="city">Ville</label><input id="city" name="city" autocomplete="address-level2" placeholder="Bâle" required></div></div><button class="btn primary full" type="submit">Rechercher la ville</button></form>
+        <form id="citySearchForm"><div class="fields"><div class="field"><label for="country">Country</label><input id="country" name="country" autocomplete="country-name" placeholder="Switzerland" required></div><div class="field"><label for="city">City</label><input id="city" name="city" autocomplete="address-level2" placeholder="Basel" required></div></div><button class="btn primary full" type="submit">Search for the city</button></form>
         <p class="search-status" id="searchStatus" aria-live="polite"></p><div class="search-results" id="searchResults"></div>
-        <div class="modal-note">La recherche transmet uniquement les mots saisis « ville + pays » au service Open‑Meteo. Elle ne transmet jamais votre position GPS.</div>
+        <div class="modal-note">The search sends only the entered “city + country” terms to Open-Meteo. It never sends your GPS location.</div>
       </section>
-      <section id="liveLocation" class="hidden"><p>Le navigateur vous demandera votre accord. Nour utilise les coordonnées pour calculer les horaires puis les conserve localement.</p><button class="btn primary full" type="button" id="liveLocationButton">Utiliser ma position actuelle</button></section>
-      <div class="actions spaced"><button class="btn ghost" type="button" id="cancelLocation">Annuler</button></div>
+      <section id="liveLocation" class="hidden"><p>Your browser will ask for permission. Nour uses the coordinates to calculate prayer times and then stores them locally.</p><button class="btn primary full" type="button" id="liveLocationButton">Use my current location</button></section>
+      <div class="actions spaced"><button class="btn ghost" type="button" id="cancelLocation">Cancel</button></div>
     </div>
   </dialog>
 
-  <dialog id="installDialog"><div class="modal"><h3>Installer Nour sur iPhone</h3><p>Apple autorise les notifications lorsque le site est ajouté à l’écran d’accueil.</p><div class="install-steps"><div class="install-step">Dans Safari, touchez le bouton <strong>Partager</strong>.</div><div class="install-step">Choisissez <strong>Sur l’écran d’accueil</strong>, puis Ajouter.</div><div class="install-step">Ouvrez Nour depuis son icône et touchez à nouveau « Activer les rappels ».</div></div><div class="actions"><button class="btn primary" type="button" id="closeInstall">J’ai compris</button></div></div></dialog>
+  <dialog id="installDialog"><div class="modal"><h3>Install Nour on iPhone</h3><p>Apple allows notifications after the website has been added to the Home Screen.</p><div class="install-steps"><div class="install-step">In Safari, tap the <strong>Share</strong> button.</div><div class="install-step">Choose <strong>Add to Home Screen</strong>, then tap Add.</div><div class="install-step">Open Nour from its icon and tap “Enable reminders” again.</div></div><div class="actions"><button class="btn primary" type="button" id="closeInstall">Got it</button></div></div></dialog>
 
-  <dialog id="privacyDialog"><div class="modal"><h3>Confidentialité et sécurité</h3><ul class="privacy-list"><li>La position GPS et la ville choisie restent dans le stockage local de cet appareil.</li><li>Les horaires sont calculés directement dans l’application.</li><li>Pour les rappels hors ligne, le serveur reçoit uniquement un abonnement de notification et une liste d’heures de prière — jamais la ville ni les coordonnées.</li><li>Aucune clé privée ou clé API n’est incluse dans les fichiers publics.</li><li>La recherche de ville envoie uniquement le pays et la ville saisis à Open‑Meteo.</li></ul><div class="actions"><button class="btn primary" type="button" id="closePrivacy">Fermer</button></div></div></dialog>
+  <dialog id="privacyDialog"><div class="modal"><h3>Privacy and security</h3><ul class="privacy-list"><li>Your GPS location and selected city remain in this device’s local storage.</li><li>Prayer times are calculated directly in the app.</li><li>For background reminders, the server receives only a push subscription and a list of prayer times — never the city or coordinates.</li><li>No private key or API key is included in public files.</li><li>City search sends only the entered country and city to Open-Meteo.</li></ul><div class="actions"><button class="btn primary" type="button" id="closePrivacy">Close</button></div></div></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

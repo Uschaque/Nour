@@ -1,8 +1,9 @@
 {
-  "name": "Nour — Horaires de prière",
+  "name": "Nour — Prayer Times",
   "short_name": "Nour",
   "id": "/",
-  "description": "Vos horaires de prière locaux et rappels simples.",
+  "description": "Your local prayer times and simple reminders.",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
