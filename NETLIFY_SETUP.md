@@ -1,39 +1,39 @@
-# Déployer Nour sur Netlify
+# Deploy Nour to Netlify
 
-## 1. Déployer le projet complet
+## 1. Deploy the complete project
 
-Importez ce dossier complet dans Netlify, pas seulement `dist`. Netlify publiera `dist` et détectera automatiquement les fonctions dans `netlify/functions` grâce à `netlify.toml`.
+Import this complete repository into Netlify, not only the `dist` directory. Netlify publishes `dist` and automatically detects the functions in `netlify/functions` through `netlify.toml`.
 
-## 2. Créer les clés Web Push
+## 2. Generate Web Push keys
 
-Sur votre ordinateur, dans ce dossier :
+From this project directory on your computer, run:
 
 ```sh
 npm install
 npx web-push generate-vapid-keys
 ```
 
-La commande affiche une clé publique et une clé privée. Ne publiez jamais la clé privée et ne l’ajoutez jamais à un fichier du projet.
+The command prints a public key and a private key. Never publish the private key or add it to a project file.
 
-## 3. Enregistrer les secrets dans Netlify
+## 3. Store the secrets in Netlify
 
-Dans Netlify, ouvrez **Project configuration → Environment variables** et ajoutez :
+In Netlify, open **Project configuration → Environment variables** and add:
 
-- `VAPID_PUBLIC_KEY` : la clé publique générée ;
-- `VAPID_PRIVATE_KEY` : la clé privée, marquée **Contains secret values** ;
-- `VAPID_SUBJECT` : une adresse de contact sous la forme `mailto:contact@votre-domaine.fr`.
+- `VAPID_PUBLIC_KEY`: the generated public key;
+- `VAPID_PRIVATE_KEY`: the generated private key, marked **Contains secret values**;
+- `VAPID_SUBJECT`: a contact address in the form `mailto:contact@your-domain.com`.
 
-Redéployez ensuite le site. La clé privée est alors disponible uniquement dans les fonctions Netlify et n’apparaît jamais dans les fichiers servis aux visiteurs.
+Redeploy the site after saving these variables. The private key is then available only to Netlify Functions and never appears in files served to visitors.
 
-## 4. Rendre le site public
+## 4. Make the website public
 
-Dans **Project configuration → General → Visitor access → Project visibility**, choisissez **Public**.
+Under **Project configuration → General → Visitor access → Project visibility**, select **Public**.
 
-## 5. Activer les rappels sur iPhone
+## 5. Enable reminders on iPhone
 
-1. Ouvrez le site dans Safari sur iOS 16.4 ou une version ultérieure.
-2. Touchez **Partager → Sur l’écran d’accueil → Ajouter**.
-3. Ouvrez Nour depuis sa nouvelle icône.
-4. Touchez **Activer les rappels** et autorisez les notifications.
+1. Open the website in Safari on iOS 16.4 or later.
+2. Tap **Share → Add to Home Screen → Add**.
+3. Open Nour from its new Home Screen icon.
+4. Tap **Enable reminders** and allow notifications.
 
-Nour envoie au serveur uniquement l’abonnement Web Push et les heures UTC des prières pour les 31 prochains jours. La ville, le pays et les coordonnées restent dans le navigateur.
+Nour sends only the Web Push subscription and calculated UTC prayer times for the next 31 days to the server. The city, country and coordinates remain in the browser.

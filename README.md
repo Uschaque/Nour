@@ -1,50 +1,50 @@
 # Nour
 
-Nour est une PWA mobile-first qui calcule les horaires de prière selon la ville choisie ou la position de l’appareil, puis envoie des rappels simples au moment de chaque prière.
+Nour is a mobile-first Progressive Web App that calculates prayer times from a selected city or the device’s location, then sends a simple reminder when each prayer begins.
 
-## Fonctionnalités
+## Features
 
-- géolocalisation facultative, conservée uniquement dans le navigateur ;
-- sélection manuelle par pays et ville ;
-- méthodes de calcul Ligue mondiale, UOIF, ISNA, Égypte et La Mecque ;
-- horaires calculés localement, avec gestion du fuseau horaire de la ville ;
-- compte à rebours avant la prochaine prière ;
-- installation comme application sur iPhone, iPad et Android ;
-- notifications Web Push lorsque l’application est fermée ;
-- fonctionnement hors ligne pour l’interface et les horaires déjà configurés ;
-- interface responsive et accessible.
+- optional geolocation, stored only in the browser;
+- manual country and city selection;
+- Muslim World League, UOIF, ISNA, Egyptian General Authority and Umm al-Qura calculation methods;
+- prayer times calculated locally with the selected city’s time zone;
+- a live countdown to the next prayer;
+- installation as an app on iPhone, iPad and Android;
+- Web Push notifications even when the app is closed;
+- offline access to the interface and previously configured prayer times;
+- a responsive, accessible interface.
 
-## Confidentialité
+## Privacy
 
-- La ville et les coordonnées GPS restent dans `localStorage` sur l’appareil.
-- La recherche de ville transmet uniquement le pays et la ville saisis à Open-Meteo.
-- Le serveur de notifications reçoit uniquement l’abonnement Web Push et les heures UTC calculées pour les 31 prochains jours.
-- La clé privée VAPID doit être enregistrée dans les variables secrètes Netlify et ne doit jamais être ajoutée au dépôt.
-- Une politique CSP et des en-têtes de sécurité sont définis dans `netlify.toml`.
+- The selected city and GPS coordinates remain in `localStorage` on the user’s device.
+- City search sends only the entered country and city to Open-Meteo.
+- The notification server receives only the Web Push subscription and calculated UTC prayer times for the next 31 days.
+- The private VAPID key must be stored in Netlify’s secret environment variables and must never be committed to this repository.
+- Content Security Policy and other security headers are defined in `netlify.toml`.
 
-## Structure
+## Project structure
 
 ```text
-dist/                       Site statique et PWA
-netlify/functions/          Fonctions d’abonnement et d’envoi Web Push
-netlify.toml                Publication, fonctions et en-têtes de sécurité
-package.json                Dépendances des fonctions Netlify
-NETLIFY_SETUP.md            Guide complet de mise en production
+dist/                       Static website and PWA
+netlify/functions/          Web Push subscription and delivery functions
+netlify.toml                Publishing, functions and security headers
+package.json                Netlify Function dependencies
+NETLIFY_SETUP.md            Complete production deployment guide
 ```
 
-## Déploiement Netlify
+## Deploying to Netlify
 
-1. Importer ce dépôt dans Netlify.
-2. Ajouter les variables `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` et `VAPID_SUBJECT` dans **Project configuration → Environment variables**.
-3. Marquer `VAPID_PRIVATE_KEY` comme secret.
-4. Redéployer puis régler la visibilité du projet sur **Public**.
+1. Import this repository into Netlify.
+2. Add `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` and `VAPID_SUBJECT` under **Project configuration → Environment variables**.
+3. Mark `VAPID_PRIVATE_KEY` as a secret value.
+4. Redeploy the project and set its visibility to **Public**.
 
-Consultez [NETLIFY_SETUP.md](./NETLIFY_SETUP.md) pour les commandes et les instructions iPhone détaillées.
+See [NETLIFY_SETUP.md](./NETLIFY_SETUP.md) for the complete commands and iPhone setup instructions.
 
-## Développement local
+## Local development
 
-Le contenu de `dist/` peut être servi par n’importe quel serveur HTTP statique. Les fonctions Web Push nécessitent l’environnement Netlify et les variables VAPID.
+The contents of `dist/` can be served by any static HTTP server. Web Push functions require the Netlify environment and VAPID variables.
 
-## Sécurité
+## Security
 
-Ne créez pas de fichier `.env` versionné. Les fichiers `.env*`, `node_modules/` et `.netlify/` sont ignorés par Git. Avant chaque publication, vérifiez qu’aucune clé privée, aucun jeton et aucune donnée personnelle n’est inclus dans les fichiers suivis.
+Do not commit a `.env` file. `.env*`, `node_modules/` and `.netlify/` are ignored by Git. Before every release, verify that no private key, token, personal data or precise user location is present in tracked files.
